@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Múltiplos de 7</title>
+</head>
+<body>
+    <h1>Múltiplos de 7</h1>
+    <form id="multiplesForm">
+        <label for="number">Introduce un número:</label>
+        <input type="text" id="number" required>
+        <input type="submit" value="Calcular Múltiplos de 7">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("multiplesForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const inputNumber = document.getElementById("number").value;
+            const number = parseInt(inputNumber);
+
+            if (!isNaN(number)) {
+                let multiples = [];
+                for (let i = 1; i <= number; i++) {
+                    if (i % 7 === 0) {
+                        multiples.push(i);
+                    }
+                }
+
+                if (multiples.length > 0) {
+                    document.getElementById("result").innerHTML = "Múltiplos del 7 entre 1 y " + number + ": " + multiples.join(", ");
+                } else {
+                    document.getElementById("result").innerText = "No hay múltiplos del 7 en ese rango.";
+                }
+            } else {
+                document.getElementById("result").innerText = "Por favor, introduce un número válido.";
+            }
+        });
+    </script>
+</body>
+</html>

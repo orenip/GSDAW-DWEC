@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Repartir Caramelos</title>
+</head>
+<body>
+    <h1>Repartir Caramelos</h1>
+    <form id="candyForm">
+        <label for="candies">Cantidad de caramelos que tienes:</label>
+        <input type="number" id="candies" required>
+        <br>
+        <label for="people">Número de personas para repartir:</label>
+        <input type="number" id="people" required>
+        <br>
+        <input type="submit" value="Calcular">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("candyForm").addEventListener("submit", function (event) {
+            event.preventDefault();
+
+            const candies = parseInt(document.getElementById("candies").value);
+            const people = parseInt(document.getElementById("people").value);
+
+            if (isNaN(candies) || isNaN(people)) {
+                document.getElementById("result").innerText = "Por favor, introduce números válidos.";
+            } else {
+                const candiesPerPerson = Math.floor(candies / people);
+                const remainingCandies = candies % people;
+
+                document.getElementById("result").innerText = "Si tienes " + candies + " caramelos y hay " + people + " personas, tienes que repartir " + candiesPerPerson + " caramelos a cada uno y te sobran " + remainingCandies + " caramelos.";
+            }
+        });
+    </script>
+</body>
+</html>

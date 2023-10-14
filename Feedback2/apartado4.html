@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack</title>
+</head>
+<body>
+    <h1>Juego de Blackjack</h1>
+    <p>Tu puntuación: <span id="player-score">0</span></p>
+    <p>Puntuación de la Computadora: <span id="computer-score">0</span></p>
+    <button id="start">Comenzar Nueva Partida</button>
+    <button id="hit">Pedir Carta</button>
+    <button id="stand">Parar</button>
+    <p id="result"></p>
+
+    <script>
+        const playerScoreElement = document.getElementById("player-score");
+        const computerScoreElement = document.getElementById("computer-score");
+        const resultElement = document.getElementById("result");
+        const startButton = document.getElementById("start");
+        const hitButton = document.getElementById("hit");
+        const standButton = document.getElementById("stand");
+
+        let playerScore = 0;
+        let computerScore = 0;
+        let gameOver = false;
+
+        // Función para generar una carta aleatoria (1-11)
+        function generateCard() {
+            return Math.floor(Math.random() * 11) + 1;
+        }
+
+        // Función para calcular la puntuación
+        function calculateScore() {
+            return playerScore;
+        }
+
+        // Función para mostrar un mensaje de derrota
+        function showLossMessage() {
+            resultElement.innerText = "¡Perdiste! Tu puntuación superó 21.";
+            gameOver = true;
+        }
+
+        // Función para simular el turno de la computadora
+        function computerTurn() {
+            while (computerScore < 17) {
+                const card = generateCard();
+                computerScore += card;
+                computerScoreElement.innerText = computerScore;
+            }
+            if (computerScore > 21 || playerScore > computerScore) {
+                resultElement.innerText = "¡Ganaste!";
+            } else if (playerScore === computerScore) {
+                resultElement.innerText = "¡Empate!";
+            } else {
+                resultElement.innerText = "¡Perdiste! La puntuación de la computadora es mayor.";
+            }
+            gameOver = true;
+        }
+
+        // Manejador de eventos para el botón "Comenzar Nueva Partida"
+        startButton.addEventListener("click", function() {
+            playerScore = 0;
+            computerScore = 0;
+            playerScoreElement.innerText = playerScore;
+            computerScoreElement.innerText = computerScore;
+            resultElement.innerText = "";
+            gameOver = false;
+        });
+
+        // Manejador de eventos para el botón "Pedir Carta"
+        hitButton.addEventListener("click", function() {
+            if (!gameOver) {
+                const playerCard = generateCard();
+                playerScore += playerCard;
+                playerScoreElement.innerText = playerScore;
+
+                if (playerScore > 21) {
+                    showLossMessage();
+                }
+            }
+        });
+
+        // Manejador de eventos para el botón "Parar"
+        standButton.addEventListener("click", function() {
+            if (!gameOver) {
+                computerTurn();
+            }
+        });
+    </script>
+</body>
+</html>
