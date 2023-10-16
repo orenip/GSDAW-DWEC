@@ -1,89 +1,74 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Blackjack</title>
+    <title>Apartado 4</title>
 </head>
 <body>
-    <h1>Juego de Blackjack</h1>
-    <p>Tu puntuación: <span id="player-score">0</span></p>
-    <p>Puntuación de la Computadora: <span id="computer-score">0</span></p>
-    <button id="start">Comenzar Nueva Partida</button>
-    <button id="hit">Pedir Carta</button>
-    <button id="stand">Parar</button>
-    <p id="result"></p>
+    <h1>Apartado 4 - Blackjack</h1>
+    <p>Tu puntuación: <span id="jugador">0</span></p>
+    <p>Puntuación del Rival: <span id="rival">0</span></p>
+    <button id="inicio">Comenzar</button>
+    <p id="resultado"></p>
 
     <script>
-        const playerScoreElement = document.getElementById("player-score");
-        const computerScoreElement = document.getElementById("computer-score");
-        const resultElement = document.getElementById("result");
-        const startButton = document.getElementById("start");
-        const hitButton = document.getElementById("hit");
-        const standButton = document.getElementById("stand");
+        const puntuacionJugadorElement = document.getElementById("jugador");
+        const puntuacionRivalElement = document.getElementById("rival");
+        const resultadoElement = document.getElementById("resultado");
+        const inicioButton = document.getElementById("inicio");
 
-        let playerScore = 0;
-        let computerScore = 0;
-        let gameOver = false;
+        let puntuacionJugador = 0;
+        let puntuacionRival = 0;
+        let finPartida = false;
 
         // Función para generar una carta aleatoria (1-11)
-        function generateCard() {
+        function generarCarta() {
             return Math.floor(Math.random() * 11) + 1;
         }
 
-        // Función para calcular la puntuación
-        function calculateScore() {
-            return playerScore;
+        // Función para generar la puntuación del rival aleatoriamente (entre 14 y 21)
+        function generarPuntuacionRival() {
+            return Math.floor(Math.random() * 8) + 14;
         }
 
-        // Función para mostrar un mensaje de derrota
-        function showLossMessage() {
-            resultElement.innerText = "¡Perdiste! Tu puntuación superó 21.";
-            gameOver = true;
-        }
-
-        // Función para simular el turno de la computadora
-        function computerTurn() {
-            while (computerScore < 17) {
-                const card = generateCard();
-                computerScore += card;
-                computerScoreElement.innerText = computerScore;
-            }
-            if (computerScore > 21 || playerScore > computerScore) {
-                resultElement.innerText = "¡Ganaste!";
-            } else if (playerScore === computerScore) {
-                resultElement.innerText = "¡Empate!";
+        // Función para simular el turno del rival
+        function turnoRival() {
+            const puntuacionRival = generarPuntuacionRival();
+            puntuacionRivalElement.innerText = puntuacionRival;
+            
+            if (puntuacionRival > 21 || puntuacionJugador > puntuacionRival) {
+                resultadoElement.innerText = "¡Ganaste!";
+            } else if (puntuacionJugador === puntuacionRival) {
+                resultadoElement.innerText = "¡Empate!";
             } else {
-                resultElement.innerText = "¡Perdiste! La puntuación de la computadora es mayor.";
+                resultadoElement.innerText = "¡Perdiste! La puntuación del rival es mayor.";
             }
-            gameOver = true;
+            finPartida = true;
         }
 
-        // Manejador de eventos para el botón "Comenzar Nueva Partida"
-        startButton.addEventListener("click", function() {
-            playerScore = 0;
-            computerScore = 0;
-            playerScoreElement.innerText = playerScore;
-            computerScoreElement.innerText = computerScore;
-            resultElement.innerText = "";
-            gameOver = false;
-        });
+        // Manejador de eventos para el botón "Pedir Carta o parar"
+        inicioButton.addEventListener("click", function() {
+            puntuacionJugador = 0;
+            puntuacionRival = 0;
+            puntuacionJugadorElement.innerText = puntuacionJugador;
+            puntuacionRivalElement.innerText = puntuacionRival;
+            resultadoElement.innerText = "";
+            finPartida = false;
+            if (!finPartida) {
+                // Bucle while para seguir pidiendo cartas mientras el jugador responda "sí"
+                while (window.confirm("¿Deseas pedir una carta? Puntuación: "+puntuacionJugador)) {
+                    const carta = generarCarta();
+                    puntuacionJugador += carta;
+                    puntuacionJugadorElement.innerText = puntuacionJugador;
 
-        // Manejador de eventos para el botón "Pedir Carta"
-        hitButton.addEventListener("click", function() {
-            if (!gameOver) {
-                const playerCard = generateCard();
-                playerScore += playerCard;
-                playerScoreElement.innerText = playerScore;
-
-                if (playerScore > 21) {
-                    showLossMessage();
+                    if (puntuacionJugador > 21) {
+                        resultadoElement.innerText = "¡Perdiste! Tu puntuación superó 21.";
+                        finPartida = true;
+                        break;  
+                    }
                 }
-            }
-        });
-
-        // Manejador de eventos para el botón "Parar"
-        standButton.addEventListener("click", function() {
-            if (!gameOver) {
-                computerTurn();
+                
+                // Una vez que el jugador decide parar, ejecutamos el turno del rival
+                turnoRival();
             }
         });
     </script>

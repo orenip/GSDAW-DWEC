@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Diferencia entre el Mayor y el Menor</title>
+    <title>Apartado 2</title>
 </head>
 <body>
-    <h1>Calculadora de Diferencia</h1>
-    <form id="numbersForm">
+    <h1>Apartado 2 - Diferencia entre mayor y menor</h1>
+    <form id="formulario">
         <label for="num1">Número 1:</label>
         <input type="number" id="num1" required>
         <br>
@@ -21,10 +21,10 @@
         <input type="submit" value="Calcular Diferencia">
     </form>
 
-    <p id="result"></p>
+    <p id="resultado"></p>
 
     <script>
-        document.getElementById("numbersForm").addEventListener("submit", function (event) {
+        document.getElementById("formulario").addEventListener("submit", function (event) {
             event.preventDefault();
 
             const num1 = parseFloat(document.getElementById("num1").value);
@@ -33,13 +33,13 @@
             const num4 = parseFloat(document.getElementById("num4").value);
 
             if (!isNaN(num1) && !isNaN(num2) && !isNaN(num3) && !isNaN(num4)) {
-                const maxNumber = Math.max(num1, num2, num3, num4);
-                const minNumber = Math.min(num1, num2, num3, num4);
-                const difference = maxNumber - minNumber;
+                const maximo = Math.max(num1, num2, num3, num4);
+                const minimo = Math.min(num1, num2, num3, num4);
+                const diferencia = maximo - minimo;
 
-                document.getElementById("result").innerText = "La diferencia entre el mayor y el menor es: " + difference;
+                document.getElementById("resultado").innerText = "La diferencia entre el mayor y el menor es: " + diferencia;
             } else {
-                document.getElementById("result").innerText = "Por favor, introduce números válidos en todos los campos.";
+                document.getElementById("resultado").innerText = "Por favor, introduce números válidos en todos los campos.";
             }
         });
     </script>
