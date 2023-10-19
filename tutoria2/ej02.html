@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        /*function addVerse(ev){
+            if (ev.key=="Enter"){
+                const divPoem= document.querySelector("#poem")
+                let newP = document.createElement("P")
+                newP.textContent=document.querySelector("#entrada").value.trim()
+                document.querySelector("#entrada").value =""
+                divPoem.append(newP)
+            }
+        }*/
+        const verses = document.getElementById("entrada")
+
+        verses.addEventListener("keyup", function(event){
+            if (event.key=="Enter"){
+                //let verse = document.getElementById("entrada").value
+                let verse = this.value
+                document.getElementById("poem").innerHTML += verse + "<br>"       
+                this.value = ""
+                }
+                // }
+        })
+        //function addVerse(event){
+           
+    </script>
+</head>
+<body>
+    <div id="poem">
+
+    </div>
+    <label for="">Añade un verso y pulsa intro</label>
+    <input type="text" id="entrada" onkeyup="addVerse(event)">
+</body>
+</html>
