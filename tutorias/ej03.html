@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="entrada" placeholder="intruduzca una fecha dd-mm-aaaa">
+    <br>
+    <span id="salida"></span>
+</body>
+</html>
+<script>
+    const entrada = document.getElementById("entrada")
+    const salida = document.getElementById("salida")
+    //const expresionRegularFecha= /[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]/  // Mientras que contenga eso dara por valido aunque se ponga mas cosas
+    //const expresionRegularFecha= /^[0-9][0-9]-[0-9][0-9]-[0-9][0-9][0-9][0-9]$/ //Extrictamente esa expresion
+    //const expresionRegularFecha= /^\d\d-\d\d-\d\d\d\d$/ //Extrictamente esa expresion
+    //const expresionRegularFecha= /^\d{2}-\d{2}-\d{4}$/ //Extrictamente esa expresion
+    //const expresionRegularFecha= /^\d{1,2}[-/ ]\d{1,2}-\d{4}$/ //Extrictamente esa expresion pero entre corchetes admite lo que se quiera
+    //const expresionRegularFecha= /^\d{1,2}-[a-z]{3}-\d{4}$/i //3 letras con i al final ignora que sea MAY o MIN
+    const expresionRegularFecha= /^\d{1,2}-[a-záéíóúñ]{3}-\d{4}$/i //3 letras con i al final ignora que sea MAY o MIN
+    //const expresionRegularFecha= /^\d{1,2}-\d{1,2}-\d{4}$/ //Extrictamente esa expresion pero admite 1 o dos digitos Admiteintervalos ej 1,4
+    //if(/^19\d{2}$/.test(año) || /^20\d{2}$/.test(año) || /^2100$/.test(año))
+    //if(/^19\d{2}|20\d{2}|2100$/.test(año))
+    
+    entrada.addEventListener("keyup", function(evento){
+        if (evento.key == "Enter"){
+            //salida.textContent= "el usuario ha pulsado Intro y el texto que ha escrito es: " +entrada.value 
+            // en caso de meter br o codigo html poner inner
+            salida.innerHTML= "el usuario ha pulsado Intro y el texto que ha escrito es: " +entrada.value +"<br>"
+            if (expresionRegularFecha.test(entrada.value)){
+                salida.innerHTML+= "OK, fecha correcta"
+            }else
+            salida.innerHTML+= "fecha incorrecta"
+        }else{
+            salida.innerHTML="el usuario ha pulsado la tecla: "+evento.key
+        }
+    })
+</script>
