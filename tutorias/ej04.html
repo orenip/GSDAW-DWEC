@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="entrada" placeholder="intruduzca una fecha dd-mm-aaaa">
+    <br>
+    <span id="salida"></span>
+</body>
+</html>
+<script>
+   let contador=0
+   function mostrarContador(){
+    document.write(++contador +" ovejitas ")
+    if(contador==19) clearInterval(cuentaOvejitas) //Cancelar el interval
+   }
+
+   //setInterval(mostrarContador, 500)
+   let cuentaOvejitas=setInterval(mostrarContador, 500)
+
+   //Timeout es un interval de 1 sola repeticion
+   //setTimeout(mostrarContador, 500) //es una alarma suena y se puede apagar antes
+</script>

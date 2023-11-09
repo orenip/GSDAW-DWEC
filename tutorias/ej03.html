@@ -38,4 +38,8 @@
             salida.innerHTML="el usuario ha pulsado la tecla: "+evento.key
         }
     })
+
+    //const exprePW = /^[a-z]+[A-Z]+ $/
+    //const exprePW = /^[a-z]*&&[A-Z]*&&[0-9]*&&[!".$%&/=?"] $/
+    const exprePW= /(?.*[a-z])(?.*[A-Z])(?.*[0-9])/ //Expresion para concatenar expresiones en cualquier posición
 </script>
