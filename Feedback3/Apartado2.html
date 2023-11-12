@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 2</title>
+</head>
+
+<body>
+    <h1>Feedback 3 - Apartado 2</h1>
+    <p>Solicita al usuario que introduzca una matrícula y utiliza expresiones regulares para validar que se ha
+        introducido con el formato 1234ABC,
+        es decir, 4 dígitos decimales seguidos de 3 letras. Avisa del error en caso de incumplimiento.
+        Opcionalmente, puedes ampliarlo para que admita letras minúsculas y para que acepte también el formato 1234-ABC.
+    </p>
+    <script>
+        function validarMatricula() {
+            var matricula = prompt("Introduce una matrícula (formato 1234ABC o 1234-ABC):");
+
+            // Expresión regular que valida el formato 1234ABC o 1234-ABC
+            var formatoValido = /^(\d{4})[-]?([A-Za-z]{3})$/.test(matricula);
+
+            if (formatoValido) {
+                alert("Matrícula válida: " + matricula);
+            } else {
+                alert("Error: La matrícula no cumple con el formato especificado (1234ABC o 1234-ABC).");
+            }
+        }
+
+        // Llamada a la función al cargar la página (puedes cambiar esto según tus necesidades)
+        validarMatricula();
+    </script>
+
+</body>
+
+</html>

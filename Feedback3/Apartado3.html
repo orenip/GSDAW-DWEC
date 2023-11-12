@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 3</title>
+</head>
+
+<body>
+    <h1>Feedback 3 - Apartado 3</h1>
+    <p>Pide al usuario que escriba una contraseña. Analiza si cumple ciertos requisitos de seguridad y muestra un
+        mensaje para indicar si el requisito se cumple o no.
+        Los requisitos son: tener una longitud de más de 8 caracteres, incluir letras mayúsculas y minúsculas, incluir
+        algún dígito decimal y algún símbolo.</p>
+
+    <script>
+        function validarContrasena(contrasena) {
+            // Requisitos de seguridad
+            var longitudValida = contrasena.length >= 8;
+            var incluyeMayusculas = /[A-Z]/.test(contrasena);
+            var incluyeMinusculas = /[a-z]/.test(contrasena);
+            var incluyeDigitos = /\d/.test(contrasena);
+            var incluyeSimbolos = /[!@#$%^&*(),.?":{}|<>-]/.test(contrasena);
+
+            // Mensajes y comprobaciones
+            document.write(longitudValida ? "La longitud de la contraseña es válida.<br>" : "Error: La contraseña debe tener al menos 8 caracteres.<br>");
+            document.write(incluyeMayusculas ? "La contraseña incluye letras mayúsculas.<br>" : "Error: La contraseña debe incluir al menos una letra mayúscula.<br>");
+            document.write(incluyeMinusculas ? "La contraseña incluye letras minúsculas.<br>" : "Error: La contraseña debe incluir al menos una letra minúscula.<br>");
+            document.write(incluyeDigitos ? "La contraseña incluye al menos un dígito decimal.<br>" : "Error: La contraseña debe incluir al menos un dígito decimal.<br>");
+            document.write(incluyeSimbolos ? "La contraseña incluye al menos un símbolo.<br>" : "Error: La contraseña debe incluir al menos un símbolo.<br>");
+        }
+
+        // Llamada a la función al cargar la página (puedes cambiar esto según tus necesidades)
+        var contrasena = prompt("Introduce una contraseña que tenga al menos 8 caracteres, incluyendo mayúsculas, minúsculas, algún dígito decimal y algún símbolo:");
+        validarContrasena(contrasena);
+    </script>
+
+</body>
+
+</html>

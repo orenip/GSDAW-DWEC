@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apartado 1</title>
+    <style>
+      img {
+        cursor: pointer;
+        max-width: 200px;
+        max-height: 150px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Feedback 3 - Apartado 1</h1>
+    <p>
+      Crea una página con una miniatura de imagen. Al hacer clic en la
+      miniatura, se abre una ventana de tamaño 800 X 600 cuyo contenido incluye
+      la imagen de la miniatura en grande y un pie de foto con la fecha completa
+      y la hora del momento en el que se ha abierto la ventana. (NOTA: capturar
+      el clic sobre una imagen es similar a capturar el clic sobre un botón).
+    </p>
+    <img
+      src="https://i.pinimg.com/originals/44/89/44/4489448a7de595eaab1282da9c59c9d2.jpg"
+      alt="Miniatura de Imagen"
+      onclick="abrirVentana()"
+    />
+
+    <script>
+      function abrirVentana() {
+        // Obtener la fecha y hora actual
+        var fechaActual = new Date();
+        var fecha = fechaActual.toLocaleDateString();
+        var hora = fechaActual.toLocaleTimeString();
+
+
+        // Crear el contenido de la ventana emergente
+        var contenidoVentana = `
+            <img src="https://i.pinimg.com/originals/44/89/44/4489448a7de595eaab1282da9c59c9d2.jpg" alt="Imagen en Grande" style="max-width: 100%; max-height: 100%;">
+            <p>${fecha} ${hora}</p>
+        `;
+
+        // Abrir la ventana emergente
+        var ventana = window.open("", "_blank", "width=800, height=600");
+        ventana.document.write(contenidoVentana);
+      }
+    </script>
+  </body>
+</html>

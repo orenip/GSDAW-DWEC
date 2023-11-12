@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Apartado 4</title>
+  </head>
+  <body>
+    <h1>Feedback 3 - Apartado 4</h1>
+    <p>
+      Crea una aplicación web con JS que codifique/descodifique palabras. La
+      forma de codificar es sencilla: <br />
+      1. El usuario introduce un texto formado sólo por letras y opcionalmente
+      espacios. En caso contrario avisamos del error. <br />
+      2. Lo pasaremos a minúsculas a continuación. <br />
+      3. Sustituimos de ese texto las "l" por un "1", las "e" por un "3", las
+      "o" por un 0, las "s" por un 5. <br />
+      4. Mostramos el resultado por pantalla y ofrecemos la opción para que el
+      usuario la descodifique. <br />
+      5. Descodificar implica volver a colocar letras donde el mensaje
+      codificado tiene números. <br />
+      6. La función de codificar y la de descodificar son la misma, que acepta 2
+      parámetros: el texto de entrada que debe convertir y un booleano que le
+      indique si lo que deseamos es codificar o descodificar.
+    </p>
+
+    <label for="entrada">Introduce un texto:</label><br />
+    <textarea id="entrada"></textarea><br />
+
+    <button onclick="codificar()">Codificar</button>
+    <button onclick="descodificar()">Descodificar</button>
+
+    <p id="salida"></p>
+
+    <script>
+      function codificarDescodificar(texto, codificar) {
+        // Convertir a minúsculas
+        texto = texto.toLowerCase();
+
+        // Definir reglas de codificación/descodificación
+        //Poner la g para que la busqueda se haga de manera global en toda la cadena
+        var reglas = [
+          { buscar: / /g, reemplazar: "_" },
+          { buscar: /l/g, reemplazar: "1" },
+          { buscar: /e/g, reemplazar: "3" },
+          { buscar: /o/g, reemplazar: "0" },
+          { buscar: /s/g, reemplazar: "5" },
+        ];
+
+        // Aplicar reglas
+        reglas.forEach(function (regla) {
+          texto = texto.replace(regla.buscar, regla.reemplazar);
+        });
+
+        // Mostrar resultado
+        if (codificar) {
+          return texto;
+        } else {
+          // Descodificar invirtiendo las reglas
+          reglas.forEach(function (regla) {
+            texto = texto.replace(regla.reemplazar, regla.buscar);
+          });
+          return texto;
+        }
+      }
+
+      function codificar() {
+        var entrada = document.getElementById("entrada").value;
+        var salida = codificarDescodificar(entrada, true);
+        document.getElementById("salida").innerText =
+          "Texto codificado: " + salida;
+      }
+
+      function descodificar() {
+        var entrada = document.getElementById("entrada").value;
+        var salida = codificarDescodificar(entrada, false);
+        document.getElementById("salida").innerText =
+          "Texto descodificado: " + salida;
+      }
+    </script>
+  </body>
+</html>
