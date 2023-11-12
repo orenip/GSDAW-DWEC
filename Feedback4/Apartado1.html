@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 1</title>
+</head>
+<body>
+<h1>Feedback 4 - Apartado 1</h1>
+<p>Crear una web con un script que use el objeto Date para escribir en la página el siguiente mensaje: <br>
+    "Estamos a XX de noviembre de 2023, faltan YY días para el próximo halving de Bitcoin, que se espera para el 24 de abril de 2024."
+    Recomendación: crear un array con los meses del año en castellano (['enero','febrero',...])</p>
+<script>
+    // Array con los nombres de los meses en castellano
+    var meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+    // Fecha actual
+    var fechaActual = new Date();
+
+    // Fecha del próximo halving de Bitcoin (24 de abril de 2024)
+    var fechaHalving = new Date(2024, 3, 24);
+
+    // Calcular días restantes para el próximo halving
+    var diasRestantes = Math.ceil((fechaHalving - fechaActual) / (1000 * 60 * 60 * 24));
+
+    // Obtener nombre del mes actual
+    var nombreMes = meses[fechaActual.getMonth()];
+
+    // Mensaje a mostrar en la página
+    var mensaje = "Estamos a " + fechaActual.getDate() + " de " + nombreMes + " de " + fechaActual.getFullYear() + ", faltan " + diasRestantes + " días para el próximo halving de Bitcoin, que se espera para el 24 de abril de 2024.";
+
+    // Mostrar mensaje en la página
+    document.write("<p>" + mensaje + "</p>");
+</script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 2</title>
+</head>
+<body>
+    <h1>Feedback 4 - Apartado 2</h1>
+    <p>Crear una web con un script que pida al usuario una lista de (nombre + apellido) y las almacene en un array. <br>
+        El script pedirá palabras hasta que el usuario introduzca la cadena vacía (tecla INTRO sin escribir nada). <br>
+        Validaremos con una expresión regular que los nombres introducidos están formados por 2 palabras que empiezan en mayúsculas, el resto en minúsculas y un espacio separando nombre y apellido, informando del error en caso contrario. <br>
+        Cuando el usuario termina de introducir nombres, además, el script escribirá en la página la siguiente información: <br>
+        1.	El primer nombre introducido por el usuario. <br>
+        2.	El último nombre introducido por el usuario. <br>
+        3.	El elemento (nombre + apellido) de mayor longitud introducido por el usuario. <br>Juan
+        4.	La media aritmética de las longitudes de los elementos (nombre + apellido), redondeada al entero menor.
+        </p>
+<script>
+    // Array para almacenar nombres y apellidos
+    var listaNombres = [];
+
+    // Expresión regular para validar el formato de nombre y apellido
+    var regexNombreApellido = /^[A-Z][a-z]+ [A-Z][a-z]+$/;
+
+    // Función para pedir y almacenar nombres
+    function pedirNombres() {
+        while (true) {
+            var nombreApellido = prompt("Introduce un nombre y apellido (o presiona INTRO para terminar):");
+
+            // Salir del bucle si el usuario presiona INTRO sin escribir nada
+            if (nombreApellido === null || nombreApellido === "") {
+                break;
+            }
+
+            // Validar el formato con la expresión regular
+            if (regexNombreApellido.test(nombreApellido)) {
+                // Almacenar el nombre y apellido en el array
+                listaNombres.push(nombreApellido);
+            } else {
+                alert("Error: El formato del nombre y apellido no es válido. Debe empezar con mayúscula y contener un espacio.");
+            }
+        }
+    }
+
+    // Llamar a la función para pedir nombres
+    pedirNombres();
+
+    // Mostrar información en la página
+    document.write("<p>Primer nombre introducido: " + listaNombres[0] + "</p>");
+    document.write("<p>Último nombre introducido: " + listaNombres[listaNombres.length - 1] + "</p>");
+
+    // Encontrar el elemento (nombre + apellido) de mayor longitud
+    var nombreApellidoMasLargo = listaNombres.reduce(function (anterior, actual) {
+        return anterior.length > actual.length ? anterior : actual;
+    });
+
+    document.write("<p>Nombre y apellido más largo: " + nombreApellidoMasLargo + "</p>");
+
+    // Calcular la media de las longitudes y redondear al entero menor
+    var sumaLongitudes = listaNombres.reduce(function (suma, nombre) {
+        return suma + nombre.length;
+    }, 0);
+
+    var mediaLongitudes = Math.floor(sumaLongitudes / listaNombres.length);
+    document.write("<p>Media de las longitudes: " + mediaLongitudes + "</p>");
+</script>
+
+</body>
+</html>

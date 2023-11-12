@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 3</title>
+</head>
+<body>
+    <h1>Feedback 4 - Apartado 3</h1>
+    <p> Implementa una función "cuenta atrás" a la que le pasemos 2 parámetros, un número y un carácter ('S' o 'M') que indica si el número introducido son segundos o minutos.
+        Utilizando document.write la función escribirá en la página una cuenta atrás, siempre en segundos. <br>
+        Por ejemplo, una llamada a la función con un 2 y una 'M', escribirá en pantalla: <br> <br>
+        Faltan 120 segundos <br>
+        (Trascurrido un segundo escribirá)... <br>
+        Faltan 119 segundos. <br>
+        Faltan 118 segundos. <br>
+        ... <br>
+        Al llegar a 0, la cuenta atrás se para.</p>
+        <input type="text" id="entrada" placeholder="Introduce un número">
+        <select id="unidad">
+            <option value="S">Segundos</option>
+            <option value="M">Minutos</option>
+        </select>
+        <button id="iniciarBtn" onclick="iniciarCuentaAtras()">Iniciar Cuenta Atrás</button>
+        <br>
+        <span id="salida"></span>
+    </body>
+    </html>
+    <script>
+        function cuentaAtras(tiempo, unidad) {
+            let tiempoRestante = tiempo * (unidad === 'M' ? 60 : 1);
+            let intervalo;
+    
+            function mostrarTiempo() {
+                document.getElementById('salida').innerHTML = 'Faltan ' + tiempoRestante + ' segundos.';
+                if (tiempoRestante === 0) {
+                    clearInterval(intervalo);
+                    // Habilitar el botón después de que la cuenta atrás termine
+                    document.getElementById('iniciarBtn').disabled = false;
+                }
+                tiempoRestante--;
+            }
+    
+            mostrarTiempo(); // Mostrar el tiempo inicial inmediatamente
+    
+            // Establecer el intervalo para actualizar el tiempo restante cada segundo
+            intervalo = setInterval(mostrarTiempo, 1000);
+        }
+    
+        function iniciarCuentaAtras() {
+            // Desactivar el botón al inicio
+            document.getElementById('iniciarBtn').disabled = true;
+    
+            let tiempo = parseInt(document.getElementById('entrada').value, 10);
+            let unidad = document.getElementById('unidad').value;
+    
+            // Validar la entrada antes de iniciar la cuenta atrás
+            if (!isNaN(tiempo) && (unidad === 'S' || unidad === 'M')) {
+                cuentaAtras(tiempo, unidad);
+            } else {
+                alert('Por favor, introduce un número válido y selecciona la unidad.');
+                // Habilitar el botón en caso de error
+                document.getElementById('iniciarBtn').disabled = false;
+            }
+        }
+    </script>
