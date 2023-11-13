@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apartado 4</title>
+</head>
+
+<body>
+    <h1>Feedback 4 - Apartado 4</h1>
+    <p>Diseña una clase llamada Asignatura que permita crear objetos de tipo asignatura que reciba como parámetro el nombre de la asignatura. 
+        Esta clase tendrá las siguientes características: <br><br>
+
+        *Un atributo nombre, que contiene el nombre de la asignatura.<br>
+        *Un atributo alumnos, que contiene la lista de alumnos, inicialmente vacía.<br>
+        *Un atributo maximo, que contiene el número máximo de alumnos del grupo, que inicialmente está inicializado a 10.<br>
+        *Un método modificarMaximo, que permite modificar el número máximo de alumnos.<br>
+        *Un método que nos permita agregarAlumnos a la asignatura de uno en uno (éste método lanzará un mensaje de error si intentamos añadir más del número máximo de alumnos). <br>
+        *Un método que nos permita listar los alumnos de la asignatura. <br>
+        *Un método que nos permita eliminarAlumnos, por índice en el listado.<br>
+        
+        *Crea un objeto y realiza llamadas a los diferentes métodos para comprobar su funcionamiento.</p>
+        en js
+        <form id="asignaturaForm">
+
+            <label for="selectAsignaturas">Seleccionar Asignatura:</label>
+            <select id="selectAsignaturas"></select>
+    
+            <hr>
+    
+            <button type="button" onclick="listarAlumnos()">Listar Alumnos de la Asignatura</button>
+    
+            <div id="listarAlumnos"></div>
+            <label for="nombreAsignatura">Nombre de la Asignatura:</label>
+            <input type="text" id="nombreAsignatura" required>
+            <button type="button" onclick="crearAsignatura()">Crear Asignatura</button>
+    
+            <hr>
+    
+            <label for="nombreAlumno">Nombre del Alumno:</label>
+            <input type="text" id="nombreAlumno">
+            <button type="button" onclick="agregarAlumno()">Agregar Alumno</button>
+    
+            <hr>
+    
+            <label for="indiceEliminar">Índice del Alumno a Eliminar:</label>
+            <input type="number" id="indiceEliminar" min="1">
+            <button type="button" onclick="eliminarAlumno()">Eliminar Alumno</button>
+    
+            <hr>
+    
+            <label for="maximoAlumnos">Número Máximo de Alumnos:</label>
+            <input type="number" id="maximoAlumnos" min="1">
+            <button type="button" onclick="modificarMaximo()">Modificar Máximo</button>
+        </form>
+    
+        <div id="output"></div>
+        <div id="errorOutput"></div>
+        <div id="listarAlumnos"></div>
+
+    <script src="Apartado4.js"></script>
+</body>
+
+</html>
