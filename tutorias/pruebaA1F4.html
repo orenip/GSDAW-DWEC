@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Image Thumbnail</title>
+<script>
+function openImage(image) {
+  var win = window.open("", "Image", "width=800,height=600");
+  win.document.write("<h1>Image Thumbnail</h1>");
+  win.document.write("<img src=\"" + image + "\" width=\"800\" height=\"600\">");
+  win.document.write("<p>Date and time: " + new Date().toLocaleString());
+}
+
+window.onload = function() {
+  var thumbnail = document.getElementById("thumbnail");
+  thumbnail.addEventListener("click", function() {
+    openImage(thumbnail.src);
+  });
+};
+</script>
+</head>
+<body>
+<img id="thumbnail" src="https://i.pinimg.com/originals/44/89/44/4489448a7de595eaab1282da9c59c9d2.jpg" width="100" height="100" alt="Image Thumbnail">
+<p>Click on the image to open a larger version.</p>
+</body>
+</html>
