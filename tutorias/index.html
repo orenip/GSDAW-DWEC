@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Buscaminas</title>
+    <style>
+        /* Your styles here */
+    </style>
+</head>
+<body>
+    <h1>Buscaminas</h1>
+    <label for="nivel">Elige el nivel de juego:</label>
+    <select id="nivel" onchange="cambiarNivel()">
+        <option value="facil">Fácil</option>
+        <option value="medio">Medio</option>
+        <option value="dificil">Difícil</option>
+    </select>
+    <br>
+    <button onclick="iniciarJuego()">Iniciar Juego</button>
+    <br>
+    <table id="tablero"></table>
+
+    <script>
+        const buscaminas = (function () {
+            let tablero = [];
+            let banderas;
+            let casillasRestantes;
+
+            const NIVELES = [
+                { filas: 8, columnas: 8, minas: 10 },
+                { filas: 14, columnas: 18, minas: 40 },
+                { filas: 20, columnas: 24, minas: 99 },
+            ];
+
+            function init(nivel = NIVELES[0]) {
+                generarCampoMinas(nivel);
+                setMinas(nivel);
+                banderas = NIVELES[0].minas;
+                casillasRestantes = ((NIVELES[0].filas * NIVELES[0].columnas) - NIVELES[0].minas);
+            }
+
+            function mostrar() {
+                return tablero;
+            }
+
+            function generarCampoMinas({ filas = NIVELES[0].filas, columnas = NIVELES[0].columnas }) {
+                for (let i = 0; i < filas; i++) {
+                    tablero[i] = [];
+                    for (let j = 0; j < columnas; j++) {
+                        tablero[i][j] = 0;
+                    }
+                }
+            }
+
+            function setMinas({ filas = NIVELES[0].filas, columnas = NIVELES[0].columnas, numMinas = NIVELES[0].minas }) {
+                let i, j;
+                for (let n = 0; n < numMinas; n++) {
+                    do {
+                        i = parseInt(Math.random() * (filas));
+                        j = parseInt(Math.random() * (columnas));
+                        if (tablero[i][j] !== NIVELES[0].minas) {
+                            numMinas--;
+                            tablero[i][j] = NIVELES[0].minas;
+                        }
+                        for (let k = Math.max(0, i - 1); k <= Math.min(i + 1, filas - 1); k++) {
+                            for (let d = Math.max(0, j - 1); d <= Math.min(j + 1, columnas - 1); d++) {
+                                if (tablero[k][d] !== NIVELES[0].minas) {
+                                    tablero[k][d]++;
+                                }
+                            }
+                        }
+                    } while (numMinas !== 0);
+                }
+            }
+
+            function despejar(fila, columna) {
+                for (let j = Math.max(0, fila - 1); j <= Math.min(fila + 1, NIVELES[0].filas - 1); j++) {
+                    for (let k = Math.max(0, columna - 1); k <= Math.min(columna + 1, NIVELES[0].columnas - 1); k++) {
+                        tablero[j][k] = "-";
+                        picar(j, k);
+                    }
+                }
+            }
+
+            function picar(fila, columna) {
+                let valor = tablero[fila][columna];
+                if (valor === NIVELES[0].minas) {
+                    // Handle mine clicked (you can show a message, end the game, etc.)
+                    console.log('Mine clicked!');
+                } else {
+                    tablero[fila][columna] = valor;
+                    casillasRestantes--;
+
+                    // Check if the player has won
+                    if (casillasRestantes === 0) {
+                        console.log('You won!');
+                    }
+                }
+
+                mostrarTablero();
+            }
+
+            function marcar(fila, columna) {
+                let valor = tablero[fila][columna];
+                if (valor >= 0 || valor <= NIVELES[0].minas) {
+                    banderas--;
+                    tablero[fila][columna] = "B";
+                }
+
+                if (banderas <= 0) {
+                    return false;
+                }
+            }
+
+            return {
+                init: init,
+                mostrar: mostrar,
+                NIVELES: NIVELES,
+                picar: picar,
+                despejar: despejar,
+                marcar: marcar,
+            }
+        })();
+
+        function cambiarNivel() {
+            const nivelSeleccionado = document.getElementById('nivel').value;
+            buscaminas.init(buscaminas.NIVELES.find(nivel => nivelSeleccionado === nivelSeleccionado));
+            mostrarTablero();
+        }
+
+        function iniciarJuego() {
+            mostrarTablero();
+        }
+
+        function mostrarTablero() {
+            const tablero = buscaminas.mostrar();
+            const tableElement = document.getElementById('tablero');
+            tableElement.innerHTML = ''; // Clear the previous content
+
+            if (!tablero || tablero.length === 0) {
+                console.error("Tablero is undefined or empty.");
+                return;
+            }
+
+            for (let i = 0; i < tablero.length; i++) {
+                const row = tableElement.insertRow(i);
+                for (let j = 0; j < tablero[i].length; j++) {
+                    const cell = row.insertCell(j);
+                    cell.textContent = tablero[i][j];
+
+                    // Attach event listeners for each cell
+                    cell.addEventListener('click', () => buscaminas.picar(i, j));
+                    cell.addEventListener('contextmenu', (e) => {
+                        e.preventDefault();
+                        buscaminas.marcar(i, j);
+                        mostrarTablero(); // Update the display after marking
+                    });
+                }
+            }
+        }
+
+        buscaminas.init(); // Initialize buscaminas when the page loads
+    </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button onClick=anyadirCoche()>Añadir coche</button>
+    <button onClick=orderPrecio()>Ordenar</button>
+</body>
+</html>
+<script>
+    let coches = []
+    function anyadirCoche(){
+        let modelo= prompt("Escribe coche")
+        let precio = parseInt(prompt("Escribe precio"))
+        let newCoche ={
+            mod: modelo,
+            pre: precio
+        }
+
+        coches.push(newCoche)
+        console.log(coches)
+    }
+    function orderPrecio(){
+
+        //let cochesOrdenados =coches.sort() //modifica array
+        //let cochesOrdenados =coches.slice().sort() //duplica array y los ordena alfabeticamente
+        //let cochesOrdenados =coches.slice().sort((a,b)=>a.pre-b.pre ) //ordena por precio
+        //(a,b)=>a-b ** para ordenar numeros
+        let cochesOrdenados =coches.slice().sort((a,b)=>a.mod-b.mod ) //ordena por modelo de codigo ascii
+
+        console.log(coches)
+        console.log(cochesOrdenados)
+    }
+</script>
+    
