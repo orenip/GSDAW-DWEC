@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 1</title>
+  </head>
+  <body></body>
+</html>
+
+<script>
+  let euros = prompt("Escribe la cantidad de euros:");
+  let expeuros = /^([1-9]\d{2,}|100\d*)$/;
+
+  if (expeuros.test(euros)) {
+    let interes = prompt("Rentabilidad anual:");
+    let exprentabilidad = /^(\d{1,2}(\.\d*)?|100(\.0*)?)$/;
+    if (exprentabilidad.test(interes)) {
+      console.log(interes);
+      rentabilidad = Math.round(interes * 100) / 100;
+      console.log(rentabilidad);
+      let duracion = prompt("Duracion deposito:");
+      let expduracion = /^[1-9]\d*$/;
+      if (expduracion.test(duracion)) {
+        console.log("Depósito inicial: =" + euros);
+        console.log("Rentabilidad anual: =" + rentabilidad);
+        console.log("Año            " + "Deposito");
+        let depositoinicial = euros;
+
+        for (let i = 1; i <= duracion; i++) {
+          euros = Math.round(euros * (1 + rentabilidad / 100) * 100) / 100;
+          console.log(i + "              " + euros.toFixed(2));
+        }
+
+        let intereses =
+          (((euros - depositoinicial) / depositoinicial) * 100) / duracion;
+
+        console.log(
+          "Rentabilidad total anualizada tras " +
+            duracion +
+            " años: " +
+            intereses.toFixed(2) +
+            "%"
+        );
+      } else {
+        console.log("La duracion es incorrecta");
+      }
+    } else {
+      console.log("El interes es incorrecto");
+    }
+  } else {
+    console.log("el importe es incorrecto");
+  }
+</script>

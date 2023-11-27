@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ejercicio 2</title>
+  </head>
+  <body>
+    <h3>Gestión de pilotos</h3>
+    <button onclick="aniadirPiloto()">Añadir piloto</button>
+    <button onclick="borrarPiloto()">Borrar piloto</button>
+    <button onclick="ordenarPilotoDorsal()">Listar pilotos por dorsal</button>
+    <button onclick="ordenarPilotoNombre()">Listar pilotos por nombre</button>
+    <h3>Gestión de carreras</h3>
+    <button onclick="aniadirCarrera()">Añadir carrera</button>
+    <button onclick="borrarUltimaCarrera()">Borrar última carrera</button>
+    <button onclick="listarCarreras()">Listar carreras</button>
+    <h3>Gestión de clasificación</h3>
+    <button onclick="mostrarClasificacion()">Mostrar clasificación</button>
+    <h3>Gestión de estadísticas</h3>
+    <button onclick="mostrarPilotosConMasVictorias()">Pilotos con más victorias</button>
+    <button onclick="mostrarPilotosConMasPodios()">Pilotos con más podios</button>
+  </body>
+</html>
+
+<script>
+  let pilotos = [];
+  let carreras = [];
+
+  function aniadirPiloto() {
+    if (carreras.length === 0) {
+      let nombrePiloto = prompt("Introduce el nombre del piloto:");
+      let dorsal = pilotos.length + 1;
+      let newPiloto = {
+        nombre: nombrePiloto,
+        dorsal: dorsal,
+      };
+      pilotos.push(newPiloto);
+      console.log(
+        "Piloto añadido:",
+        newPiloto.nombre + " con dorsal: " + dorsal
+      );
+    } else {
+      console.log(
+        "No se pueden añadir pilotos después de que se hayan introducido datos de una carrera."
+      );
+    }
+  }
+
+  function borrarPiloto() {
+    if (carreras.length === 0) {
+      let dorsal = parseInt(prompt("Introduce el dorsal del piloto a borrar:"));
+      let indice = pilotos.findIndex((piloto) => piloto.dorsal === dorsal);
+
+      if (indice !== -1) {
+        let pilotoBorrado = pilotos.splice(indice, 1)[0];
+        console.log(
+          "Piloto borrado:",
+          pilotoBorrado.nombre,
+          " dorsal ",
+          pilotoBorrado.dorsal
+        );
+        pilotos.forEach((piloto, index) => {
+          piloto.dorsal = index + 1;
+        });
+      } else {
+        console.log("No se encontró ningún piloto con ese dorsal.");
+      }
+    } else {
+      console.log(
+        "No se pueden borrar pilotos después de que se hayan introducido datos de una carrera."
+      );
+    }
+  }
+
+  function ordenarPilotoDorsal() {
+    pilotos.sort((a, b) => a.dorsal - b.dorsal);
+    console.log("Listado de pilotos:");
+    pilotos.forEach((piloto) => {
+      console.log(`Nombre: ${piloto.nombre}, Dorsal: ${piloto.dorsal}`);
+    });
+  }
+
+  function ordenarPilotoNombre() {
+    pilotos.sort((a, b) => a.nombre.localeCompare(b.nombre));
+    console.log("Listado de pilotos:");
+    pilotos.forEach((piloto) => {
+      console.log(`Nombre: ${piloto.nombre}, Dorsal: ${piloto.dorsal}`);
+    });
+  }
+
+  function aniadirCarrera() {
+    if (pilotos.length > 0) {
+      let resultados = [];
+
+      pilotos.forEach((piloto) => {
+        let posicion = parseInt(
+          prompt(`Introduce la posición de ${piloto.nombre} en la carrera:`)
+        );
+        resultados.push({
+          nombre: piloto.nombre,
+          dorsal: piloto.dorsal,
+          posicion: posicion,
+        });
+      });
+
+      carreras.push(resultados);
+      console.log("Carrera añadida");
+    } else {
+      console.log("No hay pilotos para la carrera. Añade pilotos primero.");
+    }
+  }
+
+  function borrarUltimaCarrera() {
+    if (carreras.length > 0) {
+      carreras.pop();
+      console.log("Última carrera borrada.");
+    } else {
+      console.log("No hay carreras para borrar.");
+    }
+  }
+
+  function listarCarreras() {
+    if (carreras.length === 0) {
+      console.log("No hay carreras para mostrar.");
+      return;
+    }
+
+    let numeroCarrera = parseInt(
+      prompt("Introduce el número de carrera que quieres listar:")
+    );
+    if (
+      isNaN(numeroCarrera) ||
+      numeroCarrera < 1 ||
+      numeroCarrera > carreras.length
+    ) {
+      console.log("Número de carrera inválido.");
+      return;
+    }
+    let carreraSeleccionada = carreras[numeroCarrera - 1];
+    console.log(`Listado de la Carrera ${numeroCarrera}:`);
+    carreraSeleccionada.forEach((piloto) => {
+      console.log(
+        `Nombre: ${piloto.nombre}, Dorsal: ${piloto.dorsal}, Posición: ${piloto.posicion}`
+      );
+    });
+  }
+
+  function calcularPuntos(posicion) {
+    return pilotos.length - posicion + 1;
+  }
+  function mostrarClasificacion() {
+    if (pilotos.length > 0 && carreras.length > 0) {
+      let clasificacion = pilotos.map((piloto) => {
+        let puntos = carreras.reduce((totalPuntos, carrera) => {
+          let resultadoPiloto = carrera.find(
+            (result) => result.dorsal === piloto.dorsal
+          );
+          if (resultadoPiloto) {
+            return totalPuntos + calcularPuntos(resultadoPiloto.posicion);
+          } else {
+            return totalPuntos;
+          }
+        }, 0);
+
+        return {
+          dorsal: piloto.dorsal,
+          nombre: piloto.nombre,
+          puntos: puntos,
+        };
+      });
+
+      clasificacion.sort((a, b) => b.puntos - a.puntos);
+
+      console.log("Clasificación actual:");
+      clasificacion.forEach((piloto, indice) => {
+        console.log(
+          `${indice + 1}. Nombre: ${piloto.nombre}, Dorsal: ${
+            piloto.dorsal
+          }, Puntos: ${piloto.puntos}`
+        );
+      });
+    } else {
+      console.log("No hay pilotos o carreras para mostrar la clasificación.");
+    }
+  }
+
+  function obtenerEstadisticas() {
+    if (pilotos.length > 0 && carreras.length > 0) {
+      let estadisticas = pilotos.map((piloto) => {
+        let victorias = 0;
+        let podios = 0;
+
+        carreras.forEach((carrera) => {
+          let resultadoPiloto = carrera.find(
+            (result) => result.dorsal === piloto.dorsal
+          );
+
+          if (resultadoPiloto) {
+            if (resultadoPiloto.posicion === 1) {
+              victorias++;
+            }
+
+            if (resultadoPiloto.posicion <= 3) {
+              podios++;
+            }
+          }
+        });
+
+        return {
+          dorsal: piloto.dorsal,
+          nombre: piloto.nombre,
+          victorias: victorias,
+          podios: podios,
+        };
+      });
+
+      return estadisticas;
+    } else {
+      console.log("No hay pilotos o carreras para calcular estadísticas.");
+      return [];
+    }
+  }
+
+  function mostrarPilotosConMasVictorias() {
+    let estadisticas = obtenerEstadisticas();
+    estadisticas.sort((a, b) => b.victorias - a.victorias);
+
+    console.log("Pilotos con más victorias:");
+    estadisticas.forEach((piloto, indice) => {
+      console.log(
+        `${indice + 1}. Nombre: ${piloto.nombre}, Dorsal: ${
+          piloto.dorsal
+        }, Victorias: ${piloto.victorias}`
+      );
+    });
+  }
+
+  function mostrarPilotosConMasPodios() {
+    let estadisticas = obtenerEstadisticas();
+    estadisticas.sort((a, b) => b.podios - a.podios);
+
+    console.log("Pilotos con más podios:");
+    estadisticas.forEach((piloto, indice) => {
+      console.log(
+        `${indice + 1}. Nombre: ${piloto.nombre}, Dorsal: ${
+          piloto.dorsal
+        }, Podios: ${piloto.podios}`
+      );
+    });
+  }
+</script>
