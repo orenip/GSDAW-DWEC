@@ -88,7 +88,7 @@ function agregarAlumno() {
 
 function eliminarAlumno() {
     const indiceAsignatura = document.getElementById("selectAsignaturas").value;
-    const indiceEliminar = document.getElementById("indiceEliminar").value;
+    const indiceEliminar = document.getElementById("indiceEliminar").value-1;
 
     if (indiceAsignatura !== "") {
         const asignaturaSeleccionada = asignaturas[indiceAsignatura];

@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div>
+        <button onclick="javascript:aniadirPaquete()">Añadir paquete</button>
+    </div>
+    
+    
+</body>
+</html>
+<script>
+    let  anio=prompt("Escribe el año")
+let expreganio= /^19\d\d|20[01]\d|202[0-3]$/
+
+
+if (!expreganio.test(anio)){
+    console.log("es correcto")
+    document.write("año incorrecto")
+}else{
+    //pedir titulacion
+    let titul= prompt("escribe tu titula de idiomas (a1/a2/b1/b2/c1/c2):")
+    let expregtitul= /^[ABC][12]$/
+    if(!expregtitul.test(titul)){
+        document.write("Titulacion incorrecta")
+    }else{
+        let hoy= new Date()
+        let anioactual= hoy.getFullYear()
+        //trienios
+        let tri=Math.floor((anioactual- anio)/3)
+        document.write("n trienios "+tri,"<br>")
+        //sexenios
+        let ses= Math.floor((anioactual- anio)/6)
+        document.write("n sexenios "+ses,"<br>")
+        //calcular salario si todo va bien
+        let complem=0
+        console.log(complem)
+        complem += tri*18
+        complem += ses*25
+
+        
+        switch(titul.charAt(0)){
+            case "A":
+                complem+=15;break
+            case "B":
+                complem+=30;break
+            case "C":
+                complem+=40;break
+            
+        }
+        document.write("tu salario es ",complem)
+        
+    }
+    
+
+}
+
+/**19xx
+20[01]x
+202[0123]
+1900-2023
+
+expresion regular 1900 al 2023*/
+</script>
