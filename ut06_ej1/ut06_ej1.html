@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script defer type="text/javascript" src="ut06_ej1.js"></script>
+    <style>
+        .inputError {
+            background-color: lightcoral;
+        }
+    </style>
+</head>
+<body>
+    <form id="miForm" action="servidor.html">
+        <label>Nick</label>
+        <input name="nick" type="text" required>
+        <label>Error en el nick</label>
+        <br>
+
+        <select>
+            <option value="">(Elige un país)</option>
+            <option value="es">España</option>
+            <option value="ec">Ecuador</option>
+            <option value="mx">Méjico</option>
+        </select>
+        <br>
+
+        <label>Acepto las condiciones</label>
+        <input type="checkbox">
+        <br>
+        <input value="Enviar" type="submit">
+        <input value="vaciar formulario" type="reset">
+    </form>
+</body>
+</html>

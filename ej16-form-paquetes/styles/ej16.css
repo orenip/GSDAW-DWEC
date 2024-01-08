@@ -1,0 +1,20 @@
+@font-face {
+    font-family: Roboto;
+    src: url(Roboto-Regular.ttf);
+}
+@font-face {
+    font-family: Roboto-bold;
+    src: url(Roboto-Bold.ttf);
+}
+body {
+	font-family: Roboto;
+}
+legend {
+	font-family: Roboto-bold;
+}
+#fsEnvio {
+	background-color: lightyellow;
+}
+#fsTabla {
+	background-color: lightblue;
+}
