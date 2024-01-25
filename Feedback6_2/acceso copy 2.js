@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", function () {
     codeInput.disabled = true;
     codeInput.id = "codeInput";
     generateRandomCode();
-
+    
     const consoleButtons = document.createElement("div");
     consoleButtons.id = "consoleButtons";
     generateRandomButtons();
@@ -30,22 +30,6 @@ document.addEventListener("DOMContentLoaded", function () {
     document.body.appendChild(deleteButton);
     document.body.appendChild(validateButton);
     document.body.appendChild(resultContainer);
-
-    // Aplicar estilos usando JavaScript
-    document.body.style.display = "grid";
-    document.body.style.gridTemplateColumns = "repeat(4, 1fr)";
-    document.body.style.gap = "10px";
-    document.body.style.justifyContent = "center";
-    document.body.style.alignItems = "center";
-    document.body.style.height = "100vh";
-    document.body.style.margin = "0";
-    document.body.style.fontFamily = "Arial, sans-serif";
-
-    codeInput.style.gridColumn = "span 4";
-    resultInput.style.gridColumn = "span 4";
-    resultContainer.style.gridColumn = "span 4";
-    deleteButton.style.gridColumn = "span 2";
-    validateButton.style.gridColumn = "span 2";
 
     function generateRandomCode() {
         const allowedChars = "123456ABC";

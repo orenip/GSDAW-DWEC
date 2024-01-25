@@ -1,0 +1,22 @@
+//BOOLEANOS
+console.log("1 - ¿true?: ", Boolean(true))
+console.log("2 - ¿false?: ", Boolean(false))
+console.log("3 - ¿1?: ", Boolean(1))
+console.log("4 - ¿0?: ", Boolean(0))
+console.log("5 - ¿'texto'?: ", Boolean('texto'))
+console.log("6 - ¿''?: ", Boolean(''))
+console.log("7 - ¿Infinity?: ", Boolean(Infinity))
+console.log("8 - ¿NaN?: ", Boolean(NaN))
+console.log("9 - ¿undefined?: ", Boolean(undefined))
+console.log("10 - ¿null?: ", Boolean(null))
+
+//TYPEOF
+console.log("Tipo de true: ", typeof true)
+console.log("Tipo de 444: ", typeof 444)
+console.log("Tipo de 55.5: ", typeof 55.5)
+console.log("Tipo de 678n: ", typeof 678n)
+console.log("Tipo de 'texto': ", typeof 'texto')
+console.log("Tipo de undefined: ", typeof undefined)
+console.log("Tipo de null: ", typeof null)
+console.log("Tipo de NaN: ", typeof NaN)
+console.log("Tipo de una variable no inicializada: ", typeof nuevaVariable)
