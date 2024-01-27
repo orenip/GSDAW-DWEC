@@ -1,91 +1,112 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const codeInput = document.createElement("input");
-    codeInput.type = "text";
-    codeInput.disabled = true;
-    codeInput.id = "codeInput";
-    generateRandomCode();
+    // Crear contenedor para codeInput
+    const contenedorCodigo = document.createElement("div");
 
-    const consoleButtons = document.createElement("div");
-    consoleButtons.id = "consoleButtons";
-    generateRandomButtons();
+    // Crear elementos
+    const contenedorPrincipal = document.createElement("div");
+    const campoCodigo = document.createElement("input");
+    const campoResultado = document.createElement("input");
+    const contenedorBotones = document.createElement("div");
+    const botonEliminar = document.createElement("button");
+    const botonValidar = document.createElement("button");
+    const contenedorResultados = document.createElement("div");
 
-    const resultInput = document.createElement("input");
-    resultInput.type = "password";
-    resultInput.disabled = true;
+    // Configurar atributos y estilos del contenedor de código
+    contenedorCodigo.style.gridColumn = "span 4"; // Span 4 para que ocupe toda la fila
+    contenedorCodigo.style.textAlign = "left"; // Alinea el contenido a la izquierda
 
-    const deleteButton = document.createElement("button");
-    deleteButton.textContent = "X";
-    deleteButton.onclick = deleteLastCharacter;
+    // Configurar atributos y estilos del contenedor principal
+    contenedorPrincipal.style.display = "grid";
+    contenedorPrincipal.style.gridTemplateRows = "auto auto 1fr auto";
+    contenedorPrincipal.style.gap = "10px";
+    contenedorPrincipal.style.justifyContent = "center"; // Alinea el contenido hacia el centro
+    //contenedorPrincipal.style.border = "2px solid #000";
 
-    const validateButton = document.createElement("button");
-    validateButton.textContent = "Validar";
-    validateButton.onclick = validateCode;
+    // Configurar atributos y estilos del campo de código
+    campoCodigo.type = "text";
+    campoCodigo.disabled = true;
+    campoCodigo.id = "campoCodigo";
 
-    const resultContainer = document.createElement("div");
-    resultContainer.id = "resultContainer";
+    // Configurar atributos y estilos del campo de resultado
+    campoResultado.type = "password";
+    campoResultado.disabled = true;
 
-    document.body.appendChild(codeInput);
-    document.body.appendChild(consoleButtons);
-    document.body.appendChild(resultInput);
-    document.body.appendChild(deleteButton);
-    document.body.appendChild(validateButton);
-    document.body.appendChild(resultContainer);
+    // Configurar atributos y estilos del contenedor de botones
+    contenedorBotones.id = "contenedorBotones";
+    contenedorBotones.style.display = "grid";
+    contenedorBotones.style.gridTemplateColumns = "repeat(3, 1fr)";
+    contenedorBotones.style.gap = "5px";
 
-    // Aplicar estilos usando JavaScript
-    document.body.style.display = "grid";
-    document.body.style.gridTemplateColumns = "repeat(4, 1fr)";
-    document.body.style.gap = "10px";
-    document.body.style.justifyContent = "center";
-    document.body.style.alignItems = "center";
-    document.body.style.height = "100vh";
-    document.body.style.margin = "0";
-    document.body.style.fontFamily = "Arial, sans-serif";
+    // Configurar atributos y estilos del botón de eliminación
+    botonEliminar.textContent = "X";
+    botonEliminar.onclick = eliminarUltimoCaracter;
 
-    codeInput.style.gridColumn = "span 4";
-    resultInput.style.gridColumn = "span 4";
-    resultContainer.style.gridColumn = "span 4";
-    deleteButton.style.gridColumn = "span 2";
-    validateButton.style.gridColumn = "span 2";
+    // Configurar atributos y estilos del botón de validación
+    botonValidar.textContent = "Validar";
+    botonValidar.onclick = validarCodigo;
 
-    function generateRandomCode() {
-        const allowedChars = "123456ABC";
-        let randomCode = "";
+    // Configurar atributos y estilos del contenedor de resultados
+    contenedorResultados.id = "contenedorResultados";
+
+    // Agregar elementos a los contenedores
+    contenedorCodigo.appendChild(campoCodigo);
+    contenedorPrincipal.appendChild(campoResultado);
+    contenedorPrincipal.appendChild(contenedorBotones);
+    contenedorPrincipal.appendChild(botonEliminar);
+    contenedorPrincipal.appendChild(botonValidar);
+    contenedorPrincipal.appendChild(contenedorResultados);
+
+    // Agregar contenedores al cuerpo del documento
+    document.body.appendChild(contenedorCodigo);
+    document.body.appendChild(contenedorPrincipal);
+
+    // Generar código y botones
+    generarCodigoAleatorio();
+    generarBotonesAleatorios();
+
+    // Función para generar un código aleatorio
+    function generarCodigoAleatorio() {
+        const caracteresPermitidos = "123456ABC";
+        let codigoAleatorio = "";
         for (let i = 0; i < 5; i++) {
-            const randomIndex = Math.floor(Math.random() * allowedChars.length);
-            randomCode += allowedChars[randomIndex];
+            const indiceAleatorio = Math.floor(Math.random() * caracteresPermitidos.length);
+            codigoAleatorio += caracteresPermitidos[indiceAleatorio];
         }
-        codeInput.value = randomCode;
+        campoCodigo.value = codigoAleatorio;
     }
 
-    function generateRandomButtons() {
-        const allowedChars = "123456ABC";
-        const shuffledChars = allowedChars.split('').sort(() => Math.random() - 0.5);
+    // Función para generar botones con caracteres aleatorios
+    function generarBotonesAleatorios() {
+        const caracteresPermitidos = "123456ABC";
+        const caracteresDesordenados = caracteresPermitidos.split('').sort(() => Math.random() - 0.5);
 
-        for (const char of shuffledChars) {
-            const button = document.createElement("button");
-            button.textContent = char;
-            button.onclick = function () {
-                resultInput.value += "*";
-                resultInput.value = resultInput.value.slice(0, -1) + char;
+        for (let i = 0; i < caracteresDesordenados.length; i++) {
+            const boton = document.createElement("button");
+            boton.textContent = caracteresDesordenados[i];
+            boton.onclick = function () {
+                campoResultado.value += "*";
+                campoResultado.value = campoResultado.value.slice(0, -1) + caracteresDesordenados[i];
             };
-            consoleButtons.appendChild(button);
+            contenedorBotones.appendChild(boton);
         }
     }
 
-    function deleteLastCharacter() {
-        resultInput.value = resultInput.value.slice(0, -1);
+    // Función para eliminar el último carácter del resultado
+    function eliminarUltimoCaracter() {
+        campoResultado.value = campoResultado.value.slice(0, -1);
     }
 
-    function validateCode() {
-        const userCode = resultInput.value;
-        const generatedCode = codeInput.value;
+    // Función para validar el código introducido
+    function validarCodigo() {
+        const codigoUsuario = campoResultado.value;
+        const codigoGenerado = campoCodigo.value;
 
-        if (userCode === generatedCode) {
-            resultContainer.textContent = "¡Código correcto!";
-            resultContainer.style.color = "green";
+        if (codigoUsuario === codigoGenerado) {
+            contenedorResultados.textContent = "¡Código correcto!";
+            contenedorResultados.style.color = "green";
         } else {
-            resultContainer.textContent = "Código incorrecto. Inténtalo de nuevo.";
-            resultContainer.style.color = "red";
+            contenedorResultados.textContent = "Código incorrecto. Inténtalo de nuevo.";
+            contenedorResultados.style.color = "red";
         }
     }
 });
