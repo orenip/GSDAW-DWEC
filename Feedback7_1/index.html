@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vehículos Eléctricos</title>
+  <style>
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-top: 20px;
+    }
+    th, td {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    th {
+      background-color: #f2f2f2;
+    }
+    .car-image {
+      max-width: 100px;
+      max-height: 80px;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Vehículos Eléctricos</h1>
+
+<table id="carTable">
+  <thead>
+    <tr>
+      <th>Foto</th>
+      <th>Modelo</th>
+      <th>Precio</th>
+      <th>Fabricante</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+<script>
+  $(document).ready(function() {
+    // Realizar petición AJAX
+    $.get("https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/coches", function(data) {
+      displayCars(data);
+    });
+  });
+
+  function displayCars(cars) {
+    var table = $("#carTable tbody");
+    
+    cars.forEach(function(car) {
+      var row = $("<tr>");
+      var imageUrl = "http://localhost/GSDAW-DWEC/Feedback7_1/img/" + car.imagen;
+      row.append("<td><img class='car-image' src='" + imageUrl + "' alt='" + car.nombre + "'></td>");
+      row.append("<td>" + car.nombre + "</td>");
+      row.append("<td>" + car.precio + "</td>");
+      row.append("<td>" + car.fabricante + "</td>");
+      table.append(row);
+    });
+  }
+</script>
+
+</body>
+</html>
