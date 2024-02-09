@@ -1,0 +1,20 @@
+<!-- Este es el contenido que tiene que aparecer dentro del DIV "articulos" del HTML -->
+<!-- Sólo es una muestra con una categoría y un artículo -->
+
+<h5>Procesadores</h5>
+<div class="row row-cols-5">
+	<!-- Dentro de este DIV, la clase "row-cols-5" establece que caben 5 elementos como por ejemplo articulos -->
+
+	<!-- Y esto que viene es un ejemplo de un articulo -->
+	<div class="card text-center bg-light mb-2 mr-2">
+		<img src="https://thumb.pccomponentes.com/w-530-530/articles/21/213019/5-3.jpg" class="card-img-top" alt="foto">
+		<div class="card-body">
+			<p class="card-title">AMD Ryzen 5 3600</p>
+			<p class="card-text">199.90€</p>
+		</div>
+	</div>
+
+	<!-- Como es lógico, a continuación deberían estar el resto de artículos de la misma categoría -->
+</div>
+
+<!-- Y aquí debería empezar la siguiente categoría de artículos, repitiendo la estructura de arriba -->

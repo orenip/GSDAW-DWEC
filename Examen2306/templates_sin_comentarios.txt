@@ -1,0 +1,10 @@
+<h5>Procesadores</h5>
+<div class="row row-cols-5">
+	<div class="card text-center bg-light mb-2 mr-2">
+		<img src="https://thumb.pccomponentes.com/w-530-530/articles/21/213019/5-3.jpg" class="card-img-top" alt="foto">
+		<div class="card-body">
+			<p class="card-title">AMD Ryzen 5 3600</p>
+			<p class="card-text">199.90€</p>
+		</div>
+	</div>
+</div>
