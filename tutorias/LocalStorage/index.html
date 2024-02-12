@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        //tiene localstorage algun valor guardado de contrador?
+        // let contador
+        // contador = localStorage.getItem("contador");
+        // if(contador){
+
+        // }else{
+        //     contador = 0;
+        // }
+
+        // let contador = localStorage.getItem("contador") || 0;
+        // function incrementar(){
+        //     contador++;
+        //     console.log(contador);
+        //     localStorage.setItem("contador", contador);
+        // }
+
+        //Con objetos complejos o Array debemos parsearlo
+        let nombres = JSON.parse(localStorage.getItem("nombres")) || [];
+        function addNombre(){
+            nombres.push("Pepe")
+            localStorage.setItem("nombres", JSON.stringify(nombres));
+        }
+        //si ponemos en consola nombres nos devolvera el array de nombres
+    </script>
+</head>
+<body>
+    <!-- <button onclick="incrementar()">Incrementar</button> -->
+    <button onclick="addNombre()">Add Nombre</button>
+    
+</body>
+</html>

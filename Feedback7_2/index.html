@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bicicletas</title>
+</head>
+<body>
+    <h1>Bicicletas</h1>
+    <p>
+        Ejercicio2: <br>
+        El desarrollador del lado del servidor de nuestra empresa nos comunica que podemos obtener los datos de la aplicación de bicicletas en la url: “http://www.raulserranoweb.es/tienda/rest.php”
+        <br>a)    Realiza una petición de tipo GET, y muestra los datos de las bicicletas en bloques de forma similar a la imagen.
+        <br>b)    Añade también una imagen del artículo. El archivo de imagen lo podemos encontrar en http://www.raulserranoweb.es/tienda/imagenes_art/XXX donde XXX es el código del artículo.
+        <br>c)    Añade con campo select con la siguientes opciones “Todas”, ”Carretera”, ”Gravel”, “MTB”.
+        <br>d)    La url “http://www.raulserranoweb.es/tienda/rest.php” admite que le pasemos un parámetro por GET llamado cat, en cuyo caso nos devolverá únicamente los artículos de esa categoría. Cuando el usuario seleccione una categoría tendremos que volver a realizar la petición (obteniendo el parámetro cat del campo select)  y así cargar sólo la bicicletas de esa categoría.
+    </p>
+    
+    <select name="category" id="category">
+        <option value="-">Todas</option>
+        <option value="carretera">Carretera</option>
+        <option value="gravel">Gravel</option>
+        <option value="mtb">MTB</option>
+    </select>
+    
+    <table id="bikes">
+    </table>
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        // Pintar las bicicletas en bloques
+        function displayBikes(data) {
+            const bikesTable = document.getElementById('bikes');
+            bikesTable.innerHTML = ''; // Limpiar contenido previo
+            let row;
+            for (let i = 0; i < data.length; i += 2) {
+                row = bikesTable.insertRow();
+                for (let j = i; j < i + 2 && j < data.length; j++) {
+                    let cell = row.insertCell();
+                    cell.innerHTML = `
+                        <img src="http://www.raulserranoweb.es/tienda/imagenes_art/${data[j].cod}" alt="${data[j].nom}" style="width: 500px; height: 300px;">
+                        <p>${data[j].nom}</p>
+                        <p>${data[j].des}</p>
+                        <p>${data[j].cat}</p>
+                    `;
+                }
+            }
+        }
+
+        // Petición GET y mostrar datos
+        fetch('http://www.raulserranoweb.es/tienda/rest.php')
+            .then(response => response.json())
+            .then(data => {
+                displayBikes(data);
+            });
+
+        // Filtrar bicicletas por categoría
+        document.getElementById('category').addEventListener('change', function() {
+            let category = this.value;
+            let url = 'http://www.raulserranoweb.es/tienda/rest.php';
+            if (category !== '-') {
+                url += `?cat=${category}`;
+            }
+            fetch(url)
+                .then(response => response.json())
+                .then(data => {
+                    displayBikes(data);
+                });
+        });
+    </script>
+</body>
+</html>
+

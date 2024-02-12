@@ -34,32 +34,33 @@
   //ESQUEMA habitual para consulta de datos externos:
   //fetch(URL).then(desemapquetado de la respuesta).then(procesar el JSON/XML)
   //1. de manera automatica, al cargar la página, el programa pide al servidor el listado de coches y los muestra en la tabla de la URL https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/coches
-  /*JSON es: [{
-    "id": "1",
-    "nombre": "A3 Sportback e-tron",
-    "imagen": "img/Audi_A3_Sportback_e-tron.jpg",
-    "precio": "38750",
-    "fabricante": "1",
-    "tecnologia": "3"
-  },*/
+  //3. Añadir una nueva columna al listado de coches para mostrar el nombre del fabricante. 
+  //El listado de fabricantes se obtiene en la URL  https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/fabricantes
+  //Sera un fetch que se ejecutara despues del primer fetch dentro del otro fetch
+ 
   fetch('https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/coches')
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(car => {
+  .then(response => response.json())
+  .then(data => {
+    data.forEach(car => {
+      fetch(`https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/fabricantes/${car.fabricante}`)
+      .then(response => response.json())
+      .then(fabricante => {
         $('#carTable tbody').append(`
           <tr>
-            <td><img src="${car.imagen}" alt="${car.nombre}"></td>
+            <td><img src="${car.imagen}" alt="${car.nombre}" width="100"></td>
             <td>${car.nombre}</td>
             <td>${car.precio}</td>
-            <td>${car.fabricante}</td>
+            <td>${fabricante.nombre}</td>
           </tr>
         `);
       });
     });
-
+  });
 
   //2. programar input para que escuche eventos de teclado y filtre los coches que se muestran en la tabla cuyos coches incluyen lo que el usuario ha escrito en el input (serie)
-  $('input').on('input', function() {
+  //4. Añade el código necesario para que la búsqueda también tenga en cuenta el nombre del fabricante.
+  //Se puede hacer con keyup para que se ejecute cada vez que se suelta una tecla
+  $('input').on('keyup', function() {
     let serie = $(this).val().toLowerCase();
     $('#carTable tbody tr').each(function() {
       let carName = $(this).find('td:nth-child(2)').text().toLowerCase();
@@ -72,28 +73,6 @@
     });
   });
 
-  //3. Añadir una nueva columna al listado de coches para mostrar el nombre del fabricante. El listado de fabricantes se obtiene en la URL  https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/fabricantes
-  fetch('https://my-json-server.typicode.com/luismiguel-fernandez/javascript23-24/fabricantes')
-    .then(response => response.json())
-    .then(data => {
-      data.forEach(fabricante => {
-        $('#carTable tbody tr').each(function() {
-          let carFabricante = $(this).find('td:nth-child(4)').text().toLowerCase();
-          if (carFabricante == fabricante.id) {
-            $(this).append(`<td>${fabricante.nombre}</td>`);
-          }
-        });
-      });
-    });
-
-  //4. Añadir el código necesario para que la búsqueda mediante el input también tenga en cuenta el nombre del fabricante (nombre fabricante incluye lo que el usuario ha escrito en el input)
-  
- 
-
-
-
-
 </script>
-
 </body>
 </html>

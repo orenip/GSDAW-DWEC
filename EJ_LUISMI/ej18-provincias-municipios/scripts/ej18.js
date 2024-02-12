@@ -1,7 +1,8 @@
 const selProvincias = document.querySelector("#provincias")
 const selMunicipios = document.querySelector("#municipios")
 
-fetch("server/cargaProvinciasXML.php")
+//OJO CON LA RUTA Y EN EL NAVEGADOR ABRIR COMO: http://localhost/GSDAW-DWEC/EJ_LUISMI/ej18-provincias-municipios/ej18.html y no con server 5500..
+fetch("/GSDAW-DWEC/EJ_LUISMI/ej18-provincias-municipios/server/cargaProvinciasXML.php")
 .then( respuestaHTTP => respuestaHTTP.text() )
 .then( xmlTextoPlano => {
     //el XML llega en texto plano, hay que parsearlo para convertirlo en un árbol navegable
@@ -11,6 +12,7 @@ fetch("server/cargaProvinciasXML.php")
     let xmlFinal = parser.parseFromString(xmlTextoPlano,"text/xml")
     // 3. xmlFinal ya es navegable, podemos usar querySelector y querySelectorAll para localizar info
     let provincias = xmlFinal.querySelectorAll("provincia")
+
 
     provincias.forEach( p => {
         let newOption = document.createElement("OPTION")
@@ -26,7 +28,7 @@ fetch("server/cargaProvinciasXML.php")
 
 selProvincias.addEventListener("change",function(){
     if (this.value != "0") {
-        fetch("server/cargaMunicipiosXML.php?provincia=" + this.value)
+        fetch("/GSDAW-DWEC/EJ_LUISMI/ej18-provincias-municipios/server/cargaMunicipiosXML.php?provincia=" + this.value)
         .then( respuesta => respuesta.text() )
         .then( datos => {
             selMunicipios.innerHTML = "<option value='0'>(Elige municipio)</option>"
