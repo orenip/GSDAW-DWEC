@@ -1,0 +1,22 @@
+Ejercicio 1: Mostrar Canciones por Categoría
+Objetivos Obligatorios:
+
+(2p) El programa muestra en pantalla las canciones clasificadas por categoría. Es decir, primero se muestran las canciones de rock, luego las de pop, después las de electrónica, y así sucesivamente.
+Objetivos Voluntarios:
+
+(1p) El programa utiliza LocalStorage para almacenar y recuperar la configuración actual de las canciones seleccionadas por el usuario.
+(1p) El programa muestra alguna indicación visual en las canciones seleccionadas por el usuario, como aplicar un borde o cambiar el color de fondo.
+(1p) El programa permite deseleccionar canciones previamente seleccionadas. En ese caso, se actualiza la configuración actual del equipo y se resta del precio total el importe de la canción eliminada.
+(2p) El programa permite establecer el número de unidades que el usuario quiere de cada canción. Por ejemplo, el usuario podría querer elegir 2 canciones idénticas. Entonces elige la canción que desea y a continuación especifica que quiere 2 unidades de esa canción.
+Ejercicio 2: Mostrar Listas de Reproducción y Canciones
+Objetivos Obligatorios:
+
+(2p) El programa muestra en pantalla las listas de reproducción y sus canciones clasificadas por categoría. Es decir, primero se muestran las listas de rock, luego las de pop, después las de electrónica, y así sucesivamente.
+(2p) El programa permite al usuario elegir una única canción de cada lista de reproducción. Es decir, el usuario elige una sola canción de una lista de rock, otra de una lista de pop, y así sucesivamente. Las canciones seleccionadas se muestran en una tabla resumen en la parte inferior de la web.
+Objetivos Voluntarios:
+
+(1p) El programa utiliza LocalStorage para almacenar y recuperar la configuración actual de las canciones seleccionadas por el usuario.
+(1p) El programa muestra alguna indicación visual en las canciones seleccionadas por el usuario, como aplicar un borde o cambiar el color de fondo.
+(1p) El programa permite deseleccionar canciones previamente seleccionadas. En ese caso, se actualiza la configuración actual del equipo y se resta del precio total el importe de la canción eliminada.
+(2p) El programa permite establecer el número de unidades que el usuario quiere de cada canción. Por ejemplo, el usuario podría querer elegir 2 canciones idénticas. Entonces elige la canción que desea y a continuación especifica que quiere 2 unidades de esa canción.
+Estos ejercicios te permitirán practicar la manipulación de datos JSON, la visualización dinámica en el navegador y el uso de LocalStorage para almacenar datos del usuario.

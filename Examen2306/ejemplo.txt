@@ -1,0 +1,23 @@
+Objetivos Obligatorios:
+Mostrar las listas de reproducción y canciones por categoría: (2 puntos)
+
+El programa debe mostrar en pantalla las listas de reproducción y sus canciones clasificadas por categoría. Por ejemplo, primero se muestran las listas de rock, luego las de pop, después las de electrónica, y así sucesivamente.
+Permitir al usuario elegir una única canción de cada lista de reproducción: (2 puntos)
+
+El programa debe permitir al usuario seleccionar una única canción de cada lista de reproducción. Esto significa que el usuario elige una sola canción de una lista de rock, otra de una lista de pop, y así sucesivamente. Las canciones seleccionadas y sus precios individuales deben mostrarse en una tabla resumen en la parte inferior de la página.
+Calcular automáticamente el precio total de las canciones seleccionadas: (1 punto)
+
+El programa debe calcular automáticamente el precio total de todas las canciones seleccionadas por el usuario.
+Objetivos Voluntarios:
+Utilizar LocalStorage para almacenar y recuperar la configuración actual de canciones seleccionadas: (1 punto)
+
+El programa debe utilizar el objeto LocalStorage del navegador para almacenar y recuperar la configuración actual de las canciones seleccionadas por el usuario. Esto permite que la selección persista incluso después de recargar la página.
+Mostrar indicaciones visuales en las canciones seleccionadas: (1 punto)
+
+El programa debe proporcionar alguna indicación visual, como aplicar un borde o cambiar el color de fondo, en las canciones seleccionadas por el usuario. Esto ayuda a destacar las canciones elegidas en la interfaz.
+Permitir deseleccionar canciones: (1 punto)
+
+El programa debe permitir al usuario deseleccionar canciones previamente seleccionadas. Cuando se deselecciona una canción, se debe actualizar la configuración actual del equipo y restar el precio de la canción eliminada del precio total.
+Permitir establecer el número de unidades de cada canción: (2 puntos)
+
+El programa debe permitir al usuario especificar el número de unidades que desea de cada canción seleccionada. Por ejemplo, el usuario podría elegir dos unidades de la misma canción. Después de seleccionar una canción, el usuario debería poder ingresar la cantidad deseada y el programa debe actualizar el precio total en consecuencia.
