@@ -156,7 +156,7 @@ function sumaTotal() {
     }
     var filaTotal = tbody.lastElementChild;
     var precioTotal = filaTotal.querySelector("td");
-    precioTotal.innerHTML = todasVacias ? "0€" : suma + "€";
+    precioTotal.innerHTML = todasVacias ? "0€" : suma.toFixed(2) + "€";;
 }
 
 function guardarLocalStorage() {
